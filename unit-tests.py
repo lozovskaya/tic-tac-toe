@@ -1,6 +1,6 @@
 import unittest
 
-from BoardClass import Game
+from board import Game
 from minimax import minimax_algorithm
 from statuses import CellStatus, TurnStatus
 
@@ -107,7 +107,6 @@ class MyTestCase(unittest.TestCase):
                       [CellStatus.EMPTY_CELL, CellStatus.EMPTY_CELL, CellStatus.EMPTY_CELL]]
         minimax_algorithm(game)
         self.assertEqual(game.choice, (0, 0))
-
 
 
 if __name__ == '__main__':

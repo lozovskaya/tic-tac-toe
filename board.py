@@ -1,5 +1,3 @@
-import copy
-
 from statuses import CellStatus, TurnStatus
 
 
@@ -25,7 +23,6 @@ class Game:
             for cell in row:
                 print(cell.value, '| ', end="")
             print()
-            # print('-' * (4 * self.size + 1))
 
     def next_turn(self) -> TurnStatus:
         if self.current_turn == TurnStatus.COMPUTER_TURN:
