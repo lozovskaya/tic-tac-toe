@@ -1,5 +1,4 @@
 from statuses import CellStatus, TurnStatus, COMPUTER_CELL, PLAYER_CELL
-from BoardClass import Game
 
 
 def score(game, depth) -> int:
@@ -17,7 +16,7 @@ def already_calculated(game) -> bool:
     return (str(game.board), game.current_turn) in conditions.keys()
 
 
-def minimax_algorithm(game, depth = 0, debug = False) -> int:
+def minimax_algorithm(game, depth=0, debug=False) -> int:
     if game.is_game_over():
         return score(game, depth)
 
@@ -35,15 +34,12 @@ def minimax_algorithm(game, depth = 0, debug = False) -> int:
         game.board[move[0]][move[1]] = PLAYER_CELL if game.current_turn == TurnStatus.PLAYER_TURN else COMPUTER_CELL
         game.current_turn = game.next_turn()
 
-        current_score = minimax_algorithm(game, depth, debug)
-
-        '''key = (str(game.board), game.current_turn)
+        key = (str(game.board), game.current_turn)
         if already_calculated(game):
             current_score = conditions[key]
         else:
             current_score = minimax_algorithm(game, depth, debug)
             conditions[key] = current_score
-        '''
 
         if current_turn == TurnStatus.COMPUTER_TURN:
             if final_score is None or current_score > final_score:
@@ -66,19 +62,3 @@ def minimax_algorithm(game, depth = 0, debug = False) -> int:
     if debug:
         print("final move: ", game.choice, final_score)
     return final_score
-
-
-def test():
-    print("Testing minimax is activated...")
-
-    game = Game(3, TurnStatus.COMPUTER_TURN)
-    game.board = [[CellStatus.O_CELL, CellStatus.X_CELL, CellStatus.X_CELL],
-                  [CellStatus.EMPTY_CELL, CellStatus.X_CELL, CellStatus.EMPTY_CELL],
-                  [CellStatus.O_CELL, CellStatus.EMPTY_CELL, CellStatus.EMPTY_CELL]]
-    minimax_algorithm(game, 0, True)
-
-    print("result:", game.choice)
-
-
-if __name__ == '__main__':
-    test()

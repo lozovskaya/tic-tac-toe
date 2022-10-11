@@ -1,6 +1,7 @@
-from statuses import CellStatus, TurnStatus, COMPUTER_CELL, PLAYER_CELL
-from BoardClass import Game
+from board import Game
+
 from minimax import minimax_algorithm
+from statuses import TurnStatus, COMPUTER_CELL, PLAYER_CELL
 
 
 def enter_size():
@@ -20,6 +21,7 @@ def main():
 
     while not new_Game.is_board_full():
         new_Game.player_move(PLAYER_CELL)
+        new_Game.current_turn = new_Game.next_turn()
         new_Game.display_board()
 
         if new_Game.is_win(PLAYER_CELL):
